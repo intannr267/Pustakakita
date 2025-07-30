@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Book.belongsTo(models.Borrow);
+
       Book.belongsTo(models.User);
       Book.hasOne(models.Borrow);
       Book.belongsToMany(models.Category, { through: 'BookCategories' });
