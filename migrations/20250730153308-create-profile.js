@@ -2,36 +2,30 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Books', {
+    await queryInterface.createTable('Profiles', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      title: {
+      username: {
         type: Sequelize.STRING
       },
-      isbn: {
+      imageURL: {
         type: Sequelize.STRING
       },
-      pageCount: {
-        type: Sequelize.INTEGER
-      },
-      publishedDate: {
-        type: Sequelize.DATEONLY
-      },
-      thumbnailUrl: {
+      gender: {
         type: Sequelize.STRING
       },
-      shortDescription: {
-        type: Sequelize.TEXT
-      },
-      longDescription: {
-        type: Sequelize.TEXT
-      },
-      status: {
-        type: Sequelize.STRING
+      UserId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Users',
+          key: 'id'
+        },
+        onUpdate: 'cascade',
+        onDelete: 'cascade'
       },
       createdAt: {
         allowNull: false,
@@ -44,6 +38,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Books');
+    await queryInterface.dropTable('Profiles');
   }
 };
