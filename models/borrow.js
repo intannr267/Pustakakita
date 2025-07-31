@@ -1,4 +1,5 @@
 "use strict";
+const { returnDate } = require("../helpers/helper");
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Borrow extends Model {
@@ -12,7 +13,14 @@ module.exports = (sequelize, DataTypes) => {
       Borrow.belongsTo(models.Invoice);
       Borrow.belongsTo(models.Book);
     }
-  }
+  
+      formattedBorrowDate() {
+        return new Date(this.borrowDate).toLocaleDateString("id-ID");
+      }
+      formattedReturnDate() {
+        return new Date(this.returnDate).toLocaleDateString("id-ID");
+      }
+}
   Borrow.init(
     {
       BookId: DataTypes.INTEGER,
