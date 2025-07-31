@@ -2,56 +2,53 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>
-    <%= book.title %> - Detail
-  </title>
+  <meta charset="UTF-8" />
+  <title><%= book.title %> - Detail</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100 p-8">
-  <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6">
-    <h1 class="text-3xl font-bold mb-4">
-      <%= book.title %>
-    </h1>
+<body class="bg-gray-100 font-sans overflow-x-hidden min-h-screen flex flex-col">
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <%- include('partials/nav') %>
 
-      <div>
-        <img src="<%= book.imageURL %>" alt="<%= book.title %>" class="w-full rounded-lg shadow">
+  <main class="flex-grow container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-10">
+      <h1 class="text-3xl font-bold mb-10 text-yellow-900 border-b pb-2  text-center">
+        <%= book.title %>
+      </h1>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <div>
+          <img src="<%= book.imageURL %>" alt="<%= book.title %>" class="w-full rounded-lg shadow-md">
+        </div>
+
+
+        <div class="space-y-3 text-gray-700">
+          <p><span class="font-semibold">Publisher:</span> <%= book.publisher %></p>
+          <p><span class="font-semibold">ISBN:</span> <%= book.isbn %></p>
+          <p><span class="font-semibold">Page Count:</span> <%= book.pageCount %> pages</p>
+          <p><span class="font-semibold">Categories:</span>
+            <% if (book.Categories && book.Categories.length > 0) { %>
+              <%= book.Categories.map(c => c.name).join(', ') %>
+            <% } else { %>
+              Uncategorized
+            <% } %>
+          </p>
+          <div>
+            <p class="font-semibold mt-4">Description:</p>
+            <p><%= book.description %></p>
+          </div>
+        </div>
       </div>
 
 
-      <div>
-
-        <p><strong>Publisher:</strong>
-          <%= book.publisher %>
-        </p>
-        <p><strong>ISBN:</strong>
-          <%= book.isbn %>
-        </p>
-        <p><strong>Page Count:</strong>
-          <%= book.pageCount %> pages
-        </p>
-        <p><strong>Categories:</strong>
-          <% if (book.Categories && book.Categories.length> 0) { %>
-            <%= book.Categories.map(c=> c.name).join(', ') %>
-              <% } else { %>
-                Uncategorized
-                <% } %>
-        </p>
-
-        <p class="mt-4"><strong>Description:</strong></p>
-        <p>
-          <%= book.description %>
-        </p>
-      </div>
     </div>
+  </main>
 
-    <div class="mt-6">
-      <a href="/books" class="text-blue-600 hover:underline">&larr; Back to Book List</a>
-    </div>
-  </div>
+  <!-- Footer -->
+  <%- include('partials/footer') %>
+
 </body>
 
 </html>
