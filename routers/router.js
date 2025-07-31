@@ -35,6 +35,7 @@ router.post("/register", Controller.saveRegister);
 
 router.get("/login", Controller.showLogin);
 router.post("/login", Controller.saveLogin);
+router.get("/logout", Controller.logout);
 router.get("/categories", Controller.allCategories);
 router.get("/generate-invoice", isLoggedIn, Controller.generateInvoice);
 router.get("/invoices", isLoggedIn, Controller.showInvoice);

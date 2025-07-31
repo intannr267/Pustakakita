@@ -11,6 +11,15 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Category.belongsToMany(models.Book, { through: "BookCategories" });
     }
+
+    static async findAllCategories() {
+      try {
+        return Category.findAll();
+      } catch (error) {
+        console.log(error);
+        throw error;
+      }
+    }
   }
   Category.init(
     {
