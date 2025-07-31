@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PustakaKita</title>
+  </head>
+  <body>
+    <%- include('nav') %>
+
+    <h1>Register</h1>
+
+    <% if (errors) { %>
+      <% errors.forEach(val => { %>
+      <p><%= val %></p>
+      <% }) %>
+    <% } %>
+
+    <form action="/register" method="post">
+      <label for="email">Email</label><br />
+      <input type="text" name="email" id="email" /><br /><br />
+
+      <label for="password">Password</label><br />
+      <input type="password" name="password" id="password" /><br /><br />
+
+      <label for="role">Role</label><br />
+      <select name="role" id="role">
+        <option value="">--Select Role--</option>
+        <option value="guest">Guest</option>
+        <option value="admin">Admin</option></select
+      ><br /><br />
+
+      <button type="submit">Register</button>
+    </form>
+  </body>
+</html>
