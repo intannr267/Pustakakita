@@ -34,6 +34,8 @@ router.post("/register", Controller.saveRegister);
 router.get("/login", Controller.showLogin);
 router.post("/login", Controller.saveLogin);
  router.get("/categories", Controller.allCategories);
+ router.get("/profile/:id", Controller.showEditProfile);
+router.post("/profile/:id", Controller.saveEditProfile);
 // router.post("/books/add", Controller.X);
 router.get('/categories/:categoryId/books', Controller.showBooksByCategory);
 router.get('/books/:bookId', Controller.showBookDetail);
