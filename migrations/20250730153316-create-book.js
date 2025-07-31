@@ -29,6 +29,8 @@ module.exports = {
       },
       isAvailable: {
         type: Sequelize.BOOLEAN,
+        allowNull:false,
+        defaultValue:true
       },
       UserId: {
         type: Sequelize.INTEGER,
