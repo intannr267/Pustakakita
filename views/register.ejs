@@ -6,8 +6,6 @@
     <title>PustakaKita</title>
   </head>
   <body>
-    <%- include('nav') %>
-
     <h1>Register</h1>
 
     <% if (errors) { %> <% errors.forEach(val => { %>
@@ -31,14 +29,14 @@
       <select name="role" id="role">
         <option value="">--Select Role--</option>
         <option value="guest">Guest</option>
-        <option value="admin">Admin</option>
-      </select><br /><br />
+        <option value="admin">Admin</option></select
+      ><br /><br />
 
-      <label for="gender">Gender</label><br>
+      <label for="gender">Gender</label><br />
       <select name="gender" id="gender">
         <option value="male">Male</option>
-        <option value="female">Female</option>
-      </select><br><br>
+        <option value="female">Female</option></select
+      ><br /><br />
 
       <button type="submit">Register</button>
     </form>

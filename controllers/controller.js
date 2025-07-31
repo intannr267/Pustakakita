@@ -1,5 +1,12 @@
 // controllers/Controller.js
-const { Book, User, Profile, Category } = require("../models/index");
+const {
+  Book,
+  User,
+  Profile,
+  Category,
+  Borrow,
+  Invoice,
+} = require("../models/index");
 const bcrypt = require("bcryptjs");
 
 class Controller {
@@ -14,15 +21,17 @@ class Controller {
 
   static async readBook(req, res) {
     try {
+      let trigger = await Borrow.findOne({ where: { InvoiceId: null } });
       const books = await Book.findAll();
-      res.render("books", { books });
+      // res.send(books);
+      res.render("books", { books, trigger });
     } catch (err) {
       console.log(err);
       res.send(err);
     }
   }
 
-    static async allCategories(req, res) {
+  static async allCategories(req, res) {
     try {
       const categories = await Category.findAll();
       res.render("categories", { categories });
@@ -32,73 +41,82 @@ class Controller {
     }
   }
   static async showBooksByCategory(req, res) {
-  try {
-    const { categoryId } = req.params;
-    const category = await Category.findByPk(categoryId, {
-      include: [Book]
-    });
+    try {
+      const { categoryId } = req.params;
+      const category = await Category.findByPk(categoryId, {
+        include: [Book],
+      });
 
-    if (!category) throw "Category not found";
+      if (!category) throw "Category not found";
 
-    res.render("booksByCategory", { category });
-  } catch (error) {
-    console.log(error);
-    res.send(error);
-  }
-}
-
-static async showAddBookForm(req, res) {
-  try {
-    const categories = await Category.findAll(); 
-    res.render("addBook", { categories });
-  } catch (err) {
-    console.log(err);
-    res.send(err);
-  }
-}
-
-static async saveAddBook(req, res) {
-  try {
-    const { title, description, author, pageCount, publisher, imageURL, isbn, CategoryId } = req.body;
-    await Book.create({
-      title,
-      description,
-      author,
-      pageCount: Number(pageCount),
-      publisher,
-      imageURL,
-      isbn,
-      CategoryId: +CategoryId 
-    });
-
-    res.redirect("/books");
-  } catch (error) {
-    console.log(error);
-    res.send(error); 
-  }
-}
-static async showBookDetail(req, res) {
-  try {
-    const { bookId } = req.params;
-    const book = await Book.findByPk(bookId, {
-      include:[{
-        model: Category
-      }]
-    });
-    //const categories = await Category.findAll()
-
-    if (!book) {
-      throw 'Book is not found'
+      res.render("booksByCategory", { category });
+    } catch (error) {
+      console.log(error);
+      res.send(error);
     }
-    //res.send(categories);
-    res.render("bookDetail", { book });
-  } catch (error) {
-    console.log(error);
-    res.send(error);
   }
-}
 
+  static async showAddBookForm(req, res) {
+    try {
+      const categories = await Category.findAll();
+      res.render("addBook", { categories });
+    } catch (err) {
+      console.log(err);
+      res.send(err);
+    }
+  }
 
+  static async saveAddBook(req, res) {
+    try {
+      const {
+        title,
+        description,
+        author,
+        pageCount,
+        publisher,
+        imageURL,
+        isbn,
+        CategoryId,
+      } = req.body;
+      await Book.create({
+        title,
+        description,
+        author,
+        pageCount: Number(pageCount),
+        publisher,
+        imageURL,
+        isbn,
+        CategoryId: +CategoryId,
+      });
+
+      res.redirect("/books");
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  }
+  static async showBookDetail(req, res) {
+    try {
+      const { bookId } = req.params;
+      const book = await Book.findByPk(bookId, {
+        include: [
+          {
+            model: Category,
+          },
+        ],
+      });
+      //const categories = await Category.findAll()
+
+      if (!book) {
+        throw "Book is not found";
+      }
+      //res.send(categories);
+      res.render("bookDetail", { book });
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  }
 
   static async showRegister(req, res) {
     try {
@@ -179,7 +197,6 @@ static async showBookDetail(req, res) {
       let genders = ["male", "female"];
       let profile = await Profile.findByPk(+id);
       res.render("edit-profile", { profile, genders });
-      // res.send(profile);
     } catch (error) {
       console.log(error);
       res.send(error);
@@ -200,6 +217,78 @@ static async showBookDetail(req, res) {
       );
       res.redirect(`/profile/${id}`);
       // res.send(req.params);
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  }
+
+  static async borrowBook(req, res) {
+    try {
+      let { booksId } = req.params;
+      await Borrow.create({
+        BookId: +booksId,
+      });
+      await Book.update(
+        { isAvailable: false, UserId: req.session.userId },
+        {
+          where: {
+            id: +booksId,
+          },
+        }
+      );
+
+      // res.send("X");
+      res.redirect("/books");
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  }
+
+  static async generateInvoice(req, res) {
+    try {
+      let invoice = await Invoice.create({
+        invoiceDate: new Date(),
+        UserId: req.session.userId,
+      });
+      await Borrow.update(
+        { InvoiceId: +invoice.id },
+        {
+          where: {
+            InvoiceId: null,
+          },
+        }
+      );
+      // res.send(req.session.id);
+      res.redirect("/books");
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  }
+
+  static async getInvoices(req, res) {
+    try {
+      res.send("X");
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  }
+
+  static async invoiceQr(req, res) {
+    try {
+      res.send("X");
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  }
+
+  static async showInvoice(req, res) {
+    try {
+      res.send("X");
     } catch (error) {
       console.log(error);
       res.send(error);
