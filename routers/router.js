@@ -46,7 +46,7 @@ router.get("/books/:booksId/borrow", isLoggedIn, Controller.borrowBook);
 // router.get("/books/:booksId/borrow", Controller.borrowBook);
 router.get("/invoice/:id", isLoggedIn, Controller.invoiceQr);
 router.get("/invoice/:id/show", isLoggedIn, Controller.showInvoice);
-router.get('/books/:id/delete', Controller.deleteBookbyId);
+router.get("/books/:id/delete", Controller.deleteBookbyId);
 // router.get('/stores/:storeId/employeeId/edit', Controller.X);
 // router.post('/stores/:storeId/employeeId/edit', Controller.X);
 // router.get('/stores/:storeId/employees/:employeeId/delete', Controller.X);

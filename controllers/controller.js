@@ -20,29 +20,29 @@ class Controller {
     }
   }
 
-static async readBook(req, res) {
-  try {
-    let trigger = await Borrow.findOne({ where: { InvoiceId: null } });
-    const { title } = req.query;
+  static async readBook(req, res) {
+    try {
+      let trigger = await Borrow.findOne({ where: { InvoiceId: null } });
+      const { title } = req.query;
 
-    let options = {};
+      let options = {};
 
-    if (title) {
-      options.where = {
-        title: {
-          [Op.iLike]: `%${title}%` 
-        }
-      };
+      if (title) {
+        options.where = {
+          title: {
+            [Op.iLike]: `%${title}%`,
+          },
+        };
+      }
+
+      const books = await Book.findAll(options);
+
+      res.render("books", { books, trigger });
+    } catch (err) {
+      console.log(err);
+      res.send(err);
     }
-
-    const books = await Book.findAll(options); 
-
-    res.render("books", { books, trigger });
-  } catch (err) {
-    console.log(err);
-    res.send(err);
   }
-}
 
   static async allCategories(req, res) {
     try {
@@ -120,25 +120,25 @@ static async readBook(req, res) {
       });
       //const categories = await Category.findAll()
 
-    if (!book) {
-      throw 'Book is not found'
+      if (!book) {
+        throw "Book is not found";
+      }
+      //res.send(categories);
+      res.render("bookDetail", { book });
+    } catch (error) {
+      console.log(error);
+      res.send(error);
     }
-    //res.send(categories);
-    res.render("bookDetail", { book });
-  } catch (error) {
-    console.log(error);
-    res.send(error);
   }
-}
-static async deleteBookbyId(req, res) {
-  try {
-    const { id } = req.params;
-    await Book.destroy({ where: { id } });
-    res.redirect("/books");
-  } catch (err) {
-    res.send(err);
+  static async deleteBookbyId(req, res) {
+    try {
+      const { id } = req.params;
+      await Book.destroy({ where: { id } });
+      res.redirect("/books");
+    } catch (err) {
+      res.send(err);
+    }
   }
-}
   static async showRegister(req, res) {
     try {
       let { errors } = req.query;
@@ -310,19 +310,19 @@ static async deleteBookbyId(req, res) {
   static async showInvoice(req, res) {
     try {
       const { borrowId } = req.params;
-  
+
       const invoice = await Borrow.findByPk(borrowId, {
         include: [
           {
             model: Book,
-            include: [Category]
+            include: [Category],
           },
           {
-            model: User
-          }
-        ]
+            model: User,
+          },
+        ],
       });
-  
+
       res.render("invoice", { invoice });
     } catch (err) {
       console.log(err);
@@ -339,3 +339,5 @@ static async deleteBookbyId(req, res) {
     }
   }
 }
+
+module.exports = Controller;
