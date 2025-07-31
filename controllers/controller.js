@@ -1,5 +1,6 @@
 // controllers/Controller.js
 const { Book, User } = require("../models/index");
+const bcrypt = require("bcryptjs");
 
 class Controller {
   static async landingPage(req, res) {
@@ -55,7 +56,9 @@ class Controller {
 
   static async showLogin(req, res) {
     try {
-      res.render("login");
+      let { err } = req.query;
+      // res.send(err);
+      res.render("login", { err });
     } catch (error) {
       console.log(error);
       res.send(error);
@@ -64,16 +67,25 @@ class Controller {
 
   static async saveLogin(req, res) {
     try {
-      res.send("X");
-    } catch (error) {
-      console.log(error);
-      res.send(error);
-    }
-  }
+      let { email, password } = req.body;
+      let user = await User.findOne({ where: { email: email } });
 
-  static async home(req, res) {
-    try {
-      res.redirect("/register");
+      if (!user) {
+        let err = `User with email ${email} not found`;
+        res.redirect(`/login?err=${err}`);
+      }
+
+      let valid = await bcrypt.compare(password, user.password);
+
+      if (!valid) {
+        let err = `Incorrect password`;
+        res.redirect(`/login?err=${err}`);
+      }
+
+      req.session.userId = user.id;
+      req.session.role = user.role;
+
+      res.redirect("/");
     } catch (error) {
       console.log(error);
       res.send(error);
