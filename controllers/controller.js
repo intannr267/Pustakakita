@@ -13,7 +13,9 @@ const bcrypt = require("bcryptjs");
 class Controller {
   static async landingPage(req, res) {
     try {
-      res.render("landingPage");
+      let { err } = req.query;
+      // res.send(err);
+      res.render("landingPage", { err });
     } catch (err) {
       console.log(err);
       res.send(err);
@@ -24,7 +26,7 @@ class Controller {
     try {
       let trigger = await Borrow.findOne({ where: { InvoiceId: null } });
       const { title } = req.query;
-
+      let role = req.session.role;
       let options = {};
 
       if (title) {
@@ -37,7 +39,7 @@ class Controller {
 
       const books = await Book.findAll(options);
 
-      res.render("books", { books, trigger });
+      res.render("books", { books, trigger, role });
     } catch (err) {
       console.log(err);
       res.send(err);
@@ -46,7 +48,7 @@ class Controller {
 
   static async allCategories(req, res) {
     try {
-      const categories = await Category.findAll();
+      const categories = await Category.findAllCategories();
       res.render("categories", { categories });
     } catch (err) {
       console.log(err);

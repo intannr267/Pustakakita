@@ -67,6 +67,12 @@
 <body class="font-sans overflow-x-hidden">
   <%- include('./partials/nav') %>
 
+  <% if (err) { %>
+    <script>
+      alert("<%= err %>");
+    </script>
+  <% } %>
+
     <!-- Hero Section with Image -->
     <section class="relative h-screen w-screen flex items-center justify-center overflow-hidden">
         <!-- Image Background -->
