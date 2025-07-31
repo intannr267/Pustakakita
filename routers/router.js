@@ -2,8 +2,28 @@ const express = require("express");
 const Controller = require("../controllers/controller.js");
 const router = express.Router();
 
-router.get("/", Controller.landingPage);
-router.get("/books", Controller.readBook);
+const isLoggedIn = (req, res, next) => {
+  if (req.session.userId) {
+    console.log(req.session);
+    next();
+  } else {
+    let err = `You need to Login`;
+    res.redirect(`/login?err=${err}`);
+  }
+};
+
+const isAdmin = (req, res, next) => {
+  if (req.session.role === "admin") {
+    console.log(req.session);
+    next();
+  } else {
+    let err = `Admins only: Access restricted.`;
+    res.redirect(`/?err=${err}`);
+  }
+};
+
+router.get("/", isLoggedIn, Controller.landingPage);
+router.get("/books", isLoggedIn, isAdmin, Controller.readBook);
 // router.get('/books/add', Controller.X);
 // router.post('/books/add', Controller.X);
 router.get("/register", Controller.showRegister);
