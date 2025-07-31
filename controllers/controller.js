@@ -22,6 +22,84 @@ class Controller {
     }
   }
 
+    static async allCategories(req, res) {
+    try {
+      const categories = await Category.findAll();
+      res.render("categories", { categories });
+    } catch (err) {
+      console.log(err);
+      res.send(err);
+    }
+  }
+  static async showBooksByCategory(req, res) {
+  try {
+    const { categoryId } = req.params;
+    const category = await Category.findByPk(categoryId, {
+      include: [Book]
+    });
+
+    if (!category) throw "Category not found";
+
+    res.render("booksByCategory", { category });
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
+}
+
+static async showAddBookForm(req, res) {
+  try {
+    const categories = await Category.findAll(); 
+    res.render("addBook", { categories });
+  } catch (err) {
+    console.log(err);
+    res.send(err);
+  }
+}
+
+static async saveAddBook(req, res) {
+  try {
+    const { title, description, author, pageCount, publisher, imageURL, isbn, CategoryId } = req.body;
+    await Book.create({
+      title,
+      description,
+      author,
+      pageCount: Number(pageCount),
+      publisher,
+      imageURL,
+      isbn,
+      CategoryId: +CategoryId 
+    });
+
+    res.redirect("/books");
+  } catch (error) {
+    console.log(error);
+    res.send(error); 
+  }
+}
+static async showBookDetail(req, res) {
+  try {
+    const { bookId } = req.params;
+    const book = await Book.findByPk(bookId, {
+      include:[{
+        model: Category
+      }]
+    });
+    //const categories = await Category.findAll()
+
+    if (!book) {
+      throw 'Book is not found'
+    }
+    //res.send(categories);
+    res.render("bookDetail", { book });
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
+}
+
+
+
   static async showRegister(req, res) {
     try {
       let { errors } = req.query;

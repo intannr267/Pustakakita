@@ -22,21 +22,23 @@ const isAdmin = (req, res, next) => {
   }
 };
 
+//router.get("/", isLoggedIn, Controller.landingPage);
 router.get("/", Controller.landingPage);
+//router.get("/books", isLoggedIn, isAdmin, Controller.readBook);
 router.get("/books", Controller.readBook);
-// router.get('/books/add', Controller.X);
-// router.post('/books/add', Controller.X);
+ router.get('/books/add', Controller.showAddBookForm);
+ router.post('/books/add', Controller.saveAddBook);
 router.get("/register", Controller.showRegister);
 router.post("/register", Controller.saveRegister);
 
 router.get("/login", Controller.showLogin);
 router.post("/login", Controller.saveLogin);
-
-router.get("/profile/:id", Controller.showEditProfile);
+ router.get("/categories", Controller.allCategories);
+ router.get("/profile/:id", Controller.showEditProfile);
 router.post("/profile/:id", Controller.saveEditProfile);
-// router.get("/books/add", Controller.X);
 // router.post("/books/add", Controller.X);
-
+router.get('/categories/:categoryId/books', Controller.showBooksByCategory);
+router.get('/books/:bookId', Controller.showBookDetail);
 // router.get('/books/:booksId/user/add', Controller.X);
 // router.post('/books/:booksId/user/add', Controller.X);
 // router.get('/stores/:storeId/employeeId/edit', Controller.X);
