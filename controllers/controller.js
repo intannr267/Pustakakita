@@ -110,10 +110,18 @@ class Controller {
 
       res.redirect("/books");
     } catch (error) {
-      console.log(error);
-      res.send(error);
+      if (error.name === "SequelizeValidationError") {
+        let errors = error.errors.map((val) => {
+          return val.message;
+        });
+        res.redirect(`/register?errors=${errors}`);
+      } else {
+        console.log(error);
+        res.send(error);
+      }
     }
   }
+
   static async showBookDetail(req, res) {
     try {
       const { bookId } = req.params;
