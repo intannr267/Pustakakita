@@ -98,8 +98,6 @@ static async showBookDetail(req, res) {
   }
 }
 
-
-
   static async showRegister(req, res) {
     try {
       let { errors } = req.query;
@@ -206,14 +204,35 @@ static async showBookDetail(req, res) {
     }
   }
 
-  static async X(req, res) {
-    try {
-      res.send("X");
-    } catch (error) {
-      console.log(error);
-      res.send(error);
-    }
+  static async borrowBook(req, res) {
+  try {
+    const { bookId } = req.params;
+    const userId = req.session.userId;
+    const book = await Book.findByPk(bookId);
+    if (book.isAvailable = false) {
+      throw new Error("Out of stock");
+    } 
+    await Borrow.create({
+      BookId: book.id,
+      UserId: userId,
+      borrowDate: new Date(),
+      returnDate: null,
+    });
+
+    await book.update({
+      isAvailable: false,
+      UserId: userId
+    });
+
+    res.redirect("/books"); 
+  } catch (err) {
+    console.log(err);
+    res.send(err.message || err);
   }
+}
+
+
+
 }
 
 module.exports = Controller;
