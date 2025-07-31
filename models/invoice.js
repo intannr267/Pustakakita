@@ -23,5 +23,9 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Invoice',
   });
+  Invoice.addHook("afterCreate", async (invoice, options) => {
+    invoice.qrCodeURL = `/invoice/${invoice.id}/show`
+    await invoice.save()
+  });
   return Invoice;
 };
