@@ -7,9 +7,9 @@ const {
   Borrow,
   Invoice,
 } = require("../models/index");
-const { borrowBook, returnDate } = require('../helpers/helper'); 
+const { borrowBook, returnDate } = require("../helpers/helper");
 
-const QRCode = require('qrcode');
+const QRCode = require("qrcode");
 const { Op, where } = require("sequelize");
 const bcrypt = require("bcryptjs");
 
@@ -18,6 +18,7 @@ class Controller {
     try {
       let { err } = req.query;
       // res.send(err);
+      console.log(req.session);
       res.render("landingPage", { err });
     } catch (err) {
       console.log(err);
@@ -296,23 +297,20 @@ class Controller {
 
   static async showInvoice(req, res) {
     try {
-
       const invoice = await Invoice.findAll({
         include: {
-          model: Borrow
-        }
+          model: Borrow,
+        },
       });
 
       if (!invoice) {
-        throw 'No Available Invoice'
+        throw "No Available Invoice";
       }
       //res.send(invoice)
       res.render("invoice-detail", { invoices: invoice });
-
-
     } catch (err) {
       console.error(err);
-      res.send(err)
+      res.send(err);
     }
   }
 
@@ -321,12 +319,12 @@ class Controller {
       const { id } = req.params;
 
       const invoice = await Invoice.findByPk(id, {
-        include: [Borrow]
+        include: [Borrow],
       });
 
       if (!invoice) throw new Error("Invoice not found");
 
-      const baseUrl = req.protocol + '://' + req.get('host');
+      const baseUrl = req.protocol + "://" + req.get("host");
       const targetUrl = `${baseUrl}/invoice/${id}/show`;
 
       const qrCodeUrl = await QRCode.toDataURL(targetUrl);
@@ -341,34 +339,44 @@ class Controller {
     try {
       const { id } = req.params;
 
-  const invoice = await Invoice.findByPk(id, {
-  include: [
-    {
-      model: User,
-      include: {
-        model: Profile
-      }
-    },
-    {
-      model: Borrow,
-      include: {
-        model: Book
-      }
-    }
-  ]
-});
+      const invoice = await Invoice.findByPk(id, {
+        include: [
+          {
+            model: User,
+            include: {
+              model: Profile,
+            },
+          },
+          {
+            model: Borrow,
+            include: {
+              model: Book,
+            },
+          },
+        ],
+      });
 
-// res.send(invoice.Borrows[0].returnDate)
+      // res.send(invoice.Borrows[0].returnDate)
 
       if (!invoice) throw new Error("Invoice not found");
 
-      res.render("invoice-showdetail", { invoice, borrowBook});
+      res.render("invoice-showdetail", { invoice, borrowBook });
     } catch (err) {
       console.log(err);
       res.send(err);
     }
   }
 
+  static async logout(req, res) {
+    try {
+      req.session.destroy();
+      console.log(req.session);
+      res.redirect("/");
+    } catch (error) {
+      console.log(err);
+      res.send(err);
+    }
+  }
 }
 
 module.exports = Controller;
