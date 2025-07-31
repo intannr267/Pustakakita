@@ -24,9 +24,6 @@ module.exports = {
       returnDate: {
         type: Sequelize.DATE
       },
-      status: {
-        type: Sequelize.BOOLEAN
-      },
       InvoiceId:  {
         type: Sequelize.INTEGER,
         references: {

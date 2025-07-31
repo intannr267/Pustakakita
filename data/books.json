@@ -6,6 +6,7 @@
     "pageCount": 288,
     "publisher": "Kepustakaan Populer Gramedia",
     "imageURL": "https://scoopadm.apps-foundry.com/ebook-covers/48650/image_highres/ID_FDH2019MTH08FDH.jpg",
+    "isAvailable": true,
     "isbn": "9786024812345"
   },
   {
@@ -15,6 +16,7 @@
     "pageCount": 184,
     "publisher": "Bhuana Ilmu Populer",
     "imageURL": "https://scoopadm.apps-foundry.com/ebook-covers/48435/image_highres/ID_BJT2019MTH07BJT.jpg",
+    "isAvailable": true,
     "isbn": "9786024812346"
   },
   {
@@ -24,6 +26,7 @@
     "pageCount": 237,
     "publisher": "MIZAN",
     "imageURL": "https://scoopadm.apps-foundry.com/ebook-covers/31760/big_covers/ID_MIZ2016MTH03TNTA_B.jpg",
+    "isAvailable": true,
     "isbn": "9786024812347"
   },
   {
@@ -33,6 +36,7 @@
     "pageCount": 258,
     "publisher": "Elex Media Komputindo",
     "imageURL": "https://scoopadm.apps-foundry.com/ebook-covers/36413/big_covers/ID_EMK2017MTH03VIBTMIFM_B.jpg",
+    "isAvailable": true,
     "isbn": "9786024812348"
   },
   {
@@ -42,6 +46,7 @@
     "pageCount": 268,
     "publisher": "Gramedia Pustaka Utama",
     "imageURL": "https://scoopadm.apps-foundry.com/ebook-covers/33187/big_covers/ID_GPU2016MTH06DYJTPMACU_B.jpg",
+    "isAvailable": true,
     "isbn": "9786024812349"
   },
   {
@@ -51,6 +56,7 @@
     "pageCount": 180,
     "publisher": "Grasindo",
     "imageURL": "https://scoopadm.apps-foundry.com/ebook-covers/33326/big_covers/ID_GRAS2016MTH07JPBE_B.jpg",
+    "isAvailable": true,
     "isbn": "9786024812350"
   },
   {
@@ -60,6 +66,7 @@
     "pageCount": 128,
     "publisher": "Elex Media Komputindo",
     "imageURL": "https://scoopadm.apps-foundry.com/ebook-covers/33425/big_covers/ID_EMK2016MTH07CBHA_B.jpg",
+    "isAvailable": true,
     "isbn": "9786024812351"
   },
   {
@@ -69,6 +76,7 @@
     "pageCount": 248,
     "publisher": "Elex Media Komputindo",
     "imageURL": "https://scoopadm.apps-foundry.com/ebook-covers/44642/image_highres/ID_PIGA2018MTH10PIGA.jpg",
+    "isAvailable": true,
     "isbn": "9786024812352"
   },
   {
@@ -78,6 +86,7 @@
     "pageCount": 274,
     "publisher": "Elex Media Komputindo",
     "imageURL": "https://scoopadm.apps-foundry.com/ebook-covers/38151/big_covers/ID_EMK2017MTH06PKOM_B.jpg",
+    "isAvailable": true,
     "isbn": "9786024812353"
   },
   {
@@ -87,6 +96,7 @@
     "pageCount": 258,
     "publisher": "Elex Media Komputindo",
     "imageURL": "https://s3-ap-southeast-1.amazonaws.com/ebook-previews/44644/165120/1.jpg",
+    "isAvailable": true,
     "isbn": "9786024812354"
   },
   {
@@ -96,6 +106,7 @@
     "pageCount": 320,
     "publisher": "Kompas Gramedia",
     "imageURL": "https://ebooks.gramedia.com/ebook-covers/34053/big_covers/ID_KPG2019MTH04FT_B.jpg",
+    "isAvailable": true,
     "isbn": "9786024812355"
   },
   {
@@ -105,6 +116,7 @@
     "pageCount": 384,
     "publisher": "Kepustakaan Populer Gramedia",
     "imageURL": "https://ebooks.gramedia.com/ebook-covers/34487/big_covers/ID_KPG2018MTH01LB_B.jpg",
+    "isAvailable": true,
     "isbn": "9786024812356"
   },
   {
@@ -114,6 +126,7 @@
     "pageCount": 320,
     "publisher": "Penguin Publishing Group",
     "imageURL": "https://m.media-amazon.com/images/I/91bYsX41DVL.jpg",
+    "isAvailable": true,
     "isbn": "9780735211292"
   }
 ]

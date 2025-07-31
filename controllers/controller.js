@@ -1,6 +1,13 @@
-//const { returnDate } = require('../helpers/helper');
- const { Op } = require("sequelize");
-const { Book, User, Profile, Category } = require("../models/index");
+// controllers/Controller.js
+const {
+  Book,
+  User,
+  Profile,
+  Category,
+  Borrow,
+  Invoice,
+} = require("../models/index");
+const { Op } = require("sequelize");
 const bcrypt = require("bcryptjs");
 
 class Controller {
@@ -13,30 +20,31 @@ class Controller {
     }
   }
 
-static async readBook(req, res) {
-  try {
-    const { title } = req.query;
+  static async readBook(req, res) {
+    try {
+      let trigger = await Borrow.findOne({ where: { InvoiceId: null } });
+      const { title } = req.query;
 
-    let options = {};
+      let options = {};
 
-    if (title) {
-      options.where = {
-        title: {
-          [Op.iLike]: `%${title}%` 
-        }
-      };
+      if (title) {
+        options.where = {
+          title: {
+            [Op.iLike]: `%${title}%`,
+          },
+        };
+      }
+
+      const books = await Book.findAll(options);
+
+      res.render("books", { books, trigger });
+    } catch (err) {
+      console.log(err);
+      res.send(err);
     }
-
-    const books = await Book.findAll(options); 
-
-    res.render("books", { books });
-  } catch (err) {
-    console.log(err);
-    res.send(err);
   }
-}
 
-    static async allCategories(req, res) {
+  static async allCategories(req, res) {
     try {
       const categories = await Category.findAll();
       res.render("categories", { categories });
@@ -46,80 +54,91 @@ static async readBook(req, res) {
     }
   }
   static async showBooksByCategory(req, res) {
-  try {
-    const { categoryId } = req.params;
-    const category = await Category.findByPk(categoryId, {
-      include: [Book]
-    });
+    try {
+      const { categoryId } = req.params;
+      const category = await Category.findByPk(categoryId, {
+        include: [Book],
+      });
 
-    if (!category) throw "Category not found";
+      if (!category) throw "Category not found";
 
-    res.render("booksByCategory", { category });
-  } catch (error) {
-    console.log(error);
-    res.send(error);
-  }
-}
-
-static async showAddBookForm(req, res) {
-  try {
-    const categories = await Category.findAll(); 
-    res.render("addBook", { categories });
-  } catch (err) {
-    console.log(err);
-    res.send(err);
-  }
-}
-
-static async saveAddBook(req, res) {
-  try {
-    const { title, description, author, pageCount, publisher, imageURL, isbn, CategoryId } = req.body;
-    await Book.create({
-      title,
-      description,
-      author,
-      pageCount: Number(pageCount),
-      publisher,
-      imageURL,
-      isbn,
-      CategoryId: +CategoryId 
-    });
-
-    res.redirect("/books");
-  } catch (error) {
-    console.log(error);
-    res.send(error); 
-  }
-}
-static async showBookDetail(req, res) {
-  try {
-    const { bookId } = req.params;
-    const book = await Book.findByPk(bookId, {
-      include:[{
-        model: Category
-      }]
-    });
-    //const categories = await Category.findAll()
-
-    if (!book) {
-      throw 'Book is not found'
+      res.render("booksByCategory", { category });
+    } catch (error) {
+      console.log(error);
+      res.send(error);
     }
-    //res.send(categories);
-    res.render("bookDetail", { book });
-  } catch (error) {
-    console.log(error);
-    res.send(error);
   }
-}
-static async deleteBookbyId(req, res) {
-  try {
-    const { id } = req.params;
-    await Book.destroy({ where: { id } });
-    res.redirect("/books");
-  } catch (err) {
-    res.send(err);
+
+  static async showAddBookForm(req, res) {
+    try {
+      const categories = await Category.findAll();
+      res.render("addBook", { categories });
+    } catch (err) {
+      console.log(err);
+      res.send(err);
+    }
   }
-}
+
+  static async saveAddBook(req, res) {
+    try {
+      const {
+        title,
+        description,
+        author,
+        pageCount,
+        publisher,
+        imageURL,
+        isbn,
+        CategoryId,
+      } = req.body;
+      await Book.create({
+        title,
+        description,
+        author,
+        pageCount: Number(pageCount),
+        publisher,
+        imageURL,
+        isbn,
+        CategoryId: +CategoryId,
+      });
+
+      res.redirect("/books");
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  }
+  static async showBookDetail(req, res) {
+    try {
+      const { bookId } = req.params;
+      const book = await Book.findByPk(bookId, {
+        include: [
+          {
+            model: Category,
+          },
+        ],
+      });
+      //const categories = await Category.findAll()
+
+      if (!book) {
+        throw "Book is not found";
+      }
+      //res.send(categories);
+      res.render("bookDetail", { book });
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  }
+  static async deleteBookbyId(req, res) {
+    try {
+      const { id } = req.params;
+      await Book.destroy({ where: { id } });
+      res.redirect("/books");
+    } catch (err) {
+      res.send(err);
+    }
+  }
   static async showRegister(req, res) {
     try {
       let { errors } = req.query;
@@ -199,7 +218,6 @@ static async deleteBookbyId(req, res) {
       let genders = ["male", "female"];
       let profile = await Profile.findByPk(+id);
       res.render("edit-profile", { profile, genders });
-      // res.send(profile);
     } catch (error) {
       console.log(error);
       res.send(error);
@@ -227,55 +245,99 @@ static async deleteBookbyId(req, res) {
   }
 
   static async borrowBook(req, res) {
-  try {
-    const { bookId } = req.params;
-    const userId = req.session.userId;
-    const book = await Book.findByPk(bookId);
-    if (book.isAvailable = false) {
-      throw new Error("Out of stock");
-    } 
-    await Borrow.create({
-      BookId: book.id,
-      UserId: userId,
-      borrowDate: new Date(),
-      returnDate: null,
-    });
-
-    await book.update({
-      isAvailable: false,
-      UserId: userId
-    });
-
-    res.redirect("/books"); 
-  } catch (err) {
-    console.log(err);
-    res.send(err.message || err);
-  }
-}
-
-static async showInvoice(req, res) {
-  try {
-    const { borrowId } = req.params;
-
-    const invoice = await Borrow.findByPk(borrowId, {
-      include: [
+    try {
+      let { booksId } = req.params;
+      await Borrow.create({
+        BookId: +booksId,
+      });
+      await Book.update(
+        { isAvailable: false, UserId: req.session.userId },
         {
-          model: Book,
-          include: [Category]
-        },
-        {
-          model: User
+          where: {
+            id: +booksId,
+          },
         }
-      ]
-    });
+      );
 
-    res.render("invoice", { invoice });
-  } catch (err) {
-    console.log(err);
-    res.send(err);
+      // res.send("X");
+      res.redirect("/books");
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
   }
-}
 
+  static async generateInvoice(req, res) {
+    try {
+      let invoice = await Invoice.create({
+        invoiceDate: new Date(),
+        UserId: req.session.userId,
+      });
+      await Borrow.update(
+        { InvoiceId: +invoice.id },
+        {
+          where: {
+            InvoiceId: null,
+          },
+        }
+      );
+      // res.send(req.session.id);
+      res.redirect("/books");
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  }
+
+  static async getInvoices(req, res) {
+    try {
+      res.send("X");
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  }
+
+  static async invoiceQr(req, res) {
+    try {
+      res.send("X");
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  }
+
+  static async showInvoice(req, res) {
+    try {
+      const { borrowId } = req.params;
+
+      const invoice = await Borrow.findByPk(borrowId, {
+        include: [
+          {
+            model: Book,
+            include: [Category],
+          },
+          {
+            model: User,
+          },
+        ],
+      });
+
+      res.render("invoice", { invoice });
+    } catch (err) {
+      console.log(err);
+      res.send(err);
+    }
+  }
+
+  static async X(req, res) {
+    try {
+      res.send("X");
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  }
 }
 
 module.exports = Controller;

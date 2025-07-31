@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
 
       Book.belongsTo(models.User);
       Book.hasOne(models.Borrow);
-      Book.belongsToMany(models.Category, { through: 'BookCategories' });
+      Book.belongsToMany(models.Category, { through: "BookCategories" });
     }
   }
   Book.init(
@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       pageCount: DataTypes.INTEGER,
       publisher: DataTypes.STRING,
       imageURL: DataTypes.STRING,
+      isAvailable: DataTypes.BOOLEAN,
       UserId: DataTypes.INTEGER,
     },
     {

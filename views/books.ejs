@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>PustakaKita - Book Collection</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <title>PustakaKita - Book Collection</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
-
-<body class="font-sans overflow-x-hidden">
-  <%- include('./partials/nav') %>
-
+  <body class="font-sans overflow-x-hidden">
+    <%- include('./partials/nav') %>
 
     <main class="flex-grow px-6 py-20">
       <h1 class="text-3xl font-bold text-center mb-6 text-yellow-900">Book Collection</h1>
@@ -20,6 +21,14 @@
           <button type="submit"
             class="bg-yellow-800 text-white px-4 py-2 hover:bg-yellow-700 transition">Search</button>
         </form>
+
+        <% if (trigger) { %>
+          <button
+            class="bg-yellow-800 text-white px-4 py-2 hover:bg-yellow-700 transition"
+          >
+            <a href="/generate-invoice">Generate Invoice</a>
+          </button>
+          <% } %>
 
 
       </div>
@@ -41,6 +50,15 @@
                 class="inline-block bg-yellow-800 text-white px-4 py-1 text-sm rounded hover:bg-yellow-700 transition">
                 Details
               </a>
+              <% if (!book.isAvailable) { %> Out of Stock <% } %> <% if
+            (book.isAvailable) { %>
+            <a
+              href="/books/<%= book.id %>/borrow"
+              class="inline-block bg-yellow-800 text-white px-3 py-1 text-sm rounded hover:bg-yellow-700 transition"
+            >
+              Borrow book
+            </a>
+            <% } %>
               <form action="/books/<%= book.id %>/delete" method="GET">
                 <button class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">Delete</button>
               </form>
