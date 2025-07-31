@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Invoice</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* fallback jika tidak pakai extend Tailwind config */
+    .bg-brown { background-color: #A67852; }
+    .text-brown-dark { color: #8B4513; }
+    .row-even { background-color: #f3ece3; }
+    .row-odd { background-color: #fffaf2; }
+    .row-hover:hover { background-color: #d9cbb7; }
+    .border-brown { border-color: #8B4513; }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 p-6">
+  <div class="max-w-3xl mx-auto bg-white shadow-lg rounded-xl p-8 mt-10 space-y-10">
+
+    <div>
+      <h2 class="text-2xl font-bold flex items-center gap-2 mb-4">
+        <span class="text-brown-dark text-lg"></span>
+        <span>Invoice Information</span>
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-4 text-sm sm:text-base">
+        <div class="flex items-center gap-2">
+          <span class="text-[#A0522D] text-lg"></span>
+          <span class="font-medium">User Name:</span>
+          <span><%= invoice.User && invoice.User.Profile 
+                    ? invoice.User.Profile.firstName + " " + invoice.User.Profile.lastName 
+                    : "Unknown" %></span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-[#A0522D] text-lg"></span>
+          <span class="font-medium">Invoice Date:</span>
+          <span><%= invoice.invoiceDate ? invoice.formattedInvoiceDate : "-" %></span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="font-medium">Return Date:</span>
+          <span><%= invoice.Borrows[0].returnDate ? invoice.Borrows[0].returnDate.toDateString() : "-" %></span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h2 class="text-2xl font-bold flex items-center gap-2 mb-4">
+        <span class="text-brown-dark text-lg"></span>
+        <span>Borrowed Books</span>
+      </h2>
+      <div class="overflow-x-auto">
+        <table class="min-w-full border border-brown text-left text-sm sm:text-base">
+          <thead class="bg-brown text-white font-semibold">
+            <tr>
+              <th class="px-4 py-2 border border-brown">No</th>
+              <th class="px-4 py-2 border border-brown">Title</th>
+              <th class="px-4 py-2 border border-brown">ISBN</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (invoice.Borrows && invoice.Borrows.length > 0) { %>
+              <% invoice.Borrows.forEach((borrow, index) => { %>
+                <tr class="row-even even:row-even odd:row-odd row-hover">
+                  <td class="px-4 py-2 border border-brown"><%= index + 1 %></td>
+                  <td class="px-4 py-2 border border-brown"><%= borrow.Book.title %></td>
+                  <td class="px-4 py-2 border border-brown"><%= borrow.Book.isbn %></td>
+                </tr>
+              <% }) %>
+            <% } else { %>
+              <tr>
+                <td colspan="3" class="px-4 py-4 text-center text-gray-500">No books found</td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

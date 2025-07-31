@@ -2,6 +2,8 @@
 const {
   Model
 } = require('sequelize');
+  const { formatDate } = require('../helpers/helper');
+//const { borrowBook } = require('../controllers/controller');
 module.exports = (sequelize, DataTypes) => {
   class Invoice extends Model {
     /**
@@ -14,11 +16,17 @@ module.exports = (sequelize, DataTypes) => {
       Invoice.belongsTo(models.User)
       Invoice.hasMany(models.Borrow)
     }
+
+  get formattedInvoiceDate() {
+  return formatDate(this.invoiceDate);
+}
+
   }
   Invoice.init({
     invoiceDate: DataTypes.DATE,
     qrCodeURL: DataTypes.STRING,
     UserId: DataTypes.INTEGER
+
   }, {
     sequelize,
     modelName: 'Invoice',

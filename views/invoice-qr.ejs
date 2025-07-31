@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Invoice QR</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center px-4">
+  <div class="max-w-xl w-full bg-white shadow-lg rounded-lg p-8">
+    <h1 class="text-3xl font-bold text-center mb-6">Invoice QR Code</h1>
+<div class="text-center mb-6">
+  <p class="text-gray-700 mb-2">
+    Invoice ID: <span class="font-semibold"><%= invoice.id %></span>
+  </p>
+  <p class="text-gray-700 mb-2">
+    Tanggal: <%= invoice.formattedInvoiceDate %>
+  </p>
+  <p class="text-gray-700">
+    Jumlah Buku Dipinjam: <%= invoice.Borrows.length %>
+  </p>
+</div>
+
+
+    <div class="flex justify-center mb-6">
+      <img src="<%= qrCodeUrl %>" alt="QR Code" class="w-64 h-64" />
+    </div>
+
+    <div class="text-center">
+      <a href="/invoices" class="inline-block bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700 transition">
+        ⬅ Back to Invoices
+      </a>
+    </div>
+  </div>
+</body>
+</html>

@@ -37,20 +37,14 @@ router.get("/login", Controller.showLogin);
 router.post("/login", Controller.saveLogin);
 router.get("/categories", Controller.allCategories);
 router.get("/generate-invoice", isLoggedIn, Controller.generateInvoice);
-router.get("/invoice", isLoggedIn, Controller.getInvoices);
+router.get("/invoices", isLoggedIn, Controller.showInvoice);
 router.get("/profile/:id", Controller.showEditProfile);
 router.post("/profile/:id", Controller.saveEditProfile);
-// router.post("/books/add", Controller.X);
 router.get("/categories/:categoryId/books", Controller.showBooksByCategory);
 router.get("/books/:bookId", Controller.showBookDetail);
-
 router.get("/books/:booksId/borrow", isLoggedIn, Controller.borrowBook);
-// router.get("/books/:booksId/borrow", Controller.borrowBook);
-router.get("/invoice/:id", isLoggedIn, Controller.invoiceQr);
-router.get("/invoice/:id/show", isLoggedIn, Controller.showInvoice);
+router.get("/invoices/:id", isLoggedIn, Controller.invoiceQr);// u/ generate QR
+router.get("/invoice/:id/show", Controller.invoiceDetail);// untuk nampilin invoice  aja
 router.get("/books/:id/delete", Controller.deleteBookbyId);
-// router.get('/stores/:storeId/employeeId/edit', Controller.X);
-// router.post('/stores/:storeId/employeeId/edit', Controller.X);
-// router.get('/stores/:storeId/employees/:employeeId/delete', Controller.X);
-// router.get('/employees', Controller.stores);
+
 module.exports = router;
