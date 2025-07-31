@@ -1,4 +1,5 @@
-// controllers/Controller.js
+//const { returnDate } = require('../helpers/helper');
+ const { Op } = require("sequelize");
 const { Book, User, Profile, Category } = require("../models/index");
 const bcrypt = require("bcryptjs");
 
@@ -12,15 +13,28 @@ class Controller {
     }
   }
 
-  static async readBook(req, res) {
-    try {
-      const books = await Book.findAll();
-      res.render("books", { books });
-    } catch (err) {
-      console.log(err);
-      res.send(err);
+static async readBook(req, res) {
+  try {
+    const { title } = req.query;
+
+    let options = {};
+
+    if (title) {
+      options.where = {
+        title: {
+          [Op.iLike]: `%${title}%` 
+        }
+      };
     }
+
+    const books = await Book.findAll(options); 
+
+    res.render("books", { books });
+  } catch (err) {
+    console.log(err);
+    res.send(err);
   }
+}
 
     static async allCategories(req, res) {
     try {
@@ -97,7 +111,15 @@ static async showBookDetail(req, res) {
     res.send(error);
   }
 }
-
+static async deleteBookbyId(req, res) {
+  try {
+    const { id } = req.params;
+    await Book.destroy({ where: { id } });
+    res.redirect("/books");
+  } catch (err) {
+    res.send(err);
+  }
+}
   static async showRegister(req, res) {
     try {
       let { errors } = req.query;
@@ -231,7 +253,28 @@ static async showBookDetail(req, res) {
   }
 }
 
+static async showInvoice(req, res) {
+  try {
+    const { borrowId } = req.params;
 
+    const invoice = await Borrow.findByPk(borrowId, {
+      include: [
+        {
+          model: Book,
+          include: [Category]
+        },
+        {
+          model: User
+        }
+      ]
+    });
+
+    res.render("invoice", { invoice });
+  } catch (err) {
+    console.log(err);
+    res.send(err);
+  }
+}
 
 }
 
