@@ -1,46 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PustakaKita</title>
-  </head>
-  <body>
-    <%- include('nav') %>
 
-    <h1>Register</h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PustakaKita - Register</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
 
-    <% if (errors) { %> <% errors.forEach(val => { %>
-    <p><%= val %></p>
-    <% }) %> <% } %>
+<body class="bg-yellow-50 min-h-screen font-sans">
 
-    <form action="/register" method="post">
-      <label for="firstName">First Name</label><br />
-      <input type="text" name="firstName" id="firstName" /><br /><br />
 
-      <label for="lastName">Last Name</label><br />
-      <input type="text" name="lastName" id="lastName" /><br /><br />
+  <main class="flex justify-center items-center py-10 px-4">
+    <div class="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
+      <h1 class="text-2xl font-bold text-yellow-800 text-center mb-6">Register</h1>
 
-      <label for="email">Email</label><br />
-      <input type="text" name="email" id="email" /><br /><br />
+      <% if (errors) { %>
+        <div class="mb-4 bg-red-100 text-red-700 rounded p-3 text-sm">
+          <% errors.forEach(val => { %>
+            <p>• <%= val %></p>
+          <% }) %>
+        </div>
+      <% } %>
 
-      <label for="password">Password</label><br />
-      <input type="password" name="password" id="password" /><br /><br />
+      <form action="/register" method="POST" class="space-y-4">
+        <div>
+          <label for="firstName" class="block font-medium text-gray-700">First Name</label>
+          <input type="text" name="firstName" id="firstName"
+            class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-yellow-500" />
+        </div>
 
-      <label for="role">Role</label><br />
-      <select name="role" id="role">
-        <option value="">--Select Role--</option>
-        <option value="guest">Guest</option>
-        <option value="admin">Admin</option>
-      </select><br /><br />
+        <div>
+          <label for="lastName" class="block font-medium text-gray-700">Last Name</label>
+          <input type="text" name="lastName" id="lastName"
+            class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-yellow-500" />
+        </div>
 
-      <label for="gender">Gender</label><br>
-      <select name="gender" id="gender">
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-      </select><br><br>
+        <div>
+          <label for="email" class="block font-medium text-gray-700">Email</label>
+          <input type="text" name="email" id="email"
+            class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-yellow-500" />
+        </div>
 
-      <button type="submit">Register</button>
-    </form>
-  </body>
+        <div>
+          <label for="password" class="block font-medium text-gray-700">Password</label>
+          <input type="password" name="password" id="password"
+            class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-yellow-500" />
+        </div>
+
+        <div>
+          <label for="role" class="block font-medium text-gray-700">Role</label>
+          <select name="role" id="role"
+            class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-yellow-500">
+            <option value="">--Select Role--</option>
+            <option value="guest">Guest</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="gender" class="block font-medium text-gray-700">Gender</label>
+          <select name="gender" id="gender"
+            class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-yellow-500">
+            <option value="">--Select Gender--</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+
+        <button type="submit"
+          class="w-full bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-2 px-4 rounded transition">
+          Register
+        </button>
+      </form>
+    </div>
+  </main>
+</body>
+
 </html>

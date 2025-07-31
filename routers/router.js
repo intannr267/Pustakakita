@@ -26,8 +26,8 @@ const isAdmin = (req, res, next) => {
 router.get("/", Controller.landingPage);
 //router.get("/books", isLoggedIn, isAdmin, Controller.readBook);
 router.get("/books", Controller.readBook);
- router.get('/books/add', Controller.showAddBookForm);
- router.post('/books/add', Controller.saveAddBook);
+router.get('/books/add', Controller.showAddBookForm);
+router.post('/books/add', Controller.saveAddBook);
 router.get("/register", Controller.showRegister);
 router.post("/register", Controller.saveRegister);
 
