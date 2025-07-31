@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PUSTAKAKITA</title>
+  </head>
+  <body>
+    <h1>Edit Profile</h1>
+
+    <form action="/profile/<%= profile.id %>" method="post">
+      <img src="<%= profile.imageURL %>" alt="" /><br />
+
+      <label for="firstName">First Name</label><br />
+      <input type="text" name="firstName" id="firstName" value="<%= profile.firstName %>"/><br /><br />
+
+      <label for="lastName">Last Name</label><br />
+      <input type="text" name="lastName" id="lastName" value="<%= profile.lastName %>"/><br /><br />
+
+      <label for="imageURL">Image URL</label><br />
+      <input type="text" name="imageURL" id="imageURL" value="<%= profile.imageURL %>"/><br /><br />
+
+      <label for="gender">Gender</label><br />
+      <select name="gender" id="gender">
+        <% genders.forEach(val => { %>
+         <option value="<%= val %>" <%= val === profile.gender ? "selected" : "" %>><%= val %></option>
+        <% }) %>
+      </select><br><br>
+
+      <button type="submit">Edit Profile</button>
+    </form>
+  </body>
+</html>

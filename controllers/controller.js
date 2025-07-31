@@ -1,5 +1,5 @@
 // controllers/Controller.js
-const { Book, User } = require("../models/index");
+const { Book, User, Profile, Category } = require("../models/index");
 const bcrypt = require("bcryptjs");
 
 class Controller {
@@ -39,7 +39,10 @@ class Controller {
   static async saveRegister(req, res) {
     try {
       let { email, password, role } = req.body;
-      await User.create({ email, password, role });
+      let { firstName, lastName, gender } = req.body;
+      let user = await User.create({ email, password, role });
+      await Profile.create({ firstName, lastName, gender, UserId: user.id });
+
       res.redirect("/login");
     } catch (error) {
       if (error.name === "SequelizeValidationError") {
@@ -86,6 +89,39 @@ class Controller {
       req.session.role = user.role;
 
       res.redirect("/");
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  }
+
+  static async showEditProfile(req, res) {
+    try {
+      let { id } = req.params;
+      let genders = ["male", "female"];
+      let profile = await Profile.findByPk(+id);
+      res.render("edit-profile", { profile, genders });
+      // res.send(profile);
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  }
+
+  static async saveEditProfile(req, res) {
+    try {
+      let { id } = req.params;
+      let { firstName, lastName, gender, imageURL } = req.body;
+      let profile = await Profile.update(
+        { firstName, lastName, gender, imageURL },
+        {
+          where: {
+            id: +id,
+          },
+        }
+      );
+      res.redirect(`/profile/${id}`);
+      // res.send(req.params);
     } catch (error) {
       console.log(error);
       res.send(error);

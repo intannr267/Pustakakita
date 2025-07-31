@@ -22,8 +22,8 @@ const isAdmin = (req, res, next) => {
   }
 };
 
-router.get("/", isLoggedIn, Controller.landingPage);
-router.get("/books", isLoggedIn, isAdmin, Controller.readBook);
+router.get("/", Controller.landingPage);
+router.get("/books", Controller.readBook);
 // router.get('/books/add', Controller.X);
 // router.post('/books/add', Controller.X);
 router.get("/register", Controller.showRegister);
@@ -31,6 +31,9 @@ router.post("/register", Controller.saveRegister);
 
 router.get("/login", Controller.showLogin);
 router.post("/login", Controller.saveLogin);
+
+router.get("/profile/:id", Controller.showEditProfile);
+router.post("/profile/:id", Controller.saveEditProfile);
 // router.get("/books/add", Controller.X);
 // router.post("/books/add", Controller.X);
 
