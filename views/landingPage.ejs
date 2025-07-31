@@ -33,15 +33,7 @@
             background: rgba(0, 0, 0, 0.5);
         }
 
-        .navbar {
-            transition: all 0.3s ease;
-        }
-
-        .navbar.scrolled {
-            background-color: rgba(0, 0, 0, 0.9);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
+  
         .mobile-menu {
             max-height: 0;
             overflow: hidden;
@@ -73,59 +65,7 @@
 </head>
 
 <body class="font-sans overflow-x-hidden">
-    <!-- Navigation Bar -->
-    <nav class="navbar fixed w-full z-50 px-8 py-3 md:px-20">
-        <div class="container mx-auto flex justify-between items-center">
-            <!-- Logo -->
-            <div class="flex items-center">
-                <a href="#" class="text-white text-2xl font-bold flex items-center">
-                    <span>PUSTAKAKITA</span>
-                </a>
-            </div>
-
-            <!-- Desktop Menu -->
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="#" class="text-white hover:text-yellow-400 transition">Home</a>
-                <a href="#featured" class="text-white hover:text-yellow-400 transition">Books</a>
-                <a href="#how-it-works" class="text-white hover:text-yellow-400 transition">Categories</a>
-                <a href="#testimonials" class="text-white hover:text-yellow-400 transition">Add Book</a>
-                <a href="#contact" class="text-white hover:text-yellow-400 transition">Invoice</a>
-                <button
-                    class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded-full transition">
-                    Sign In
-                </button>
-            </div>
-
-            <!-- Mobile Menu Button -->
-            <div class="md:hidden flex items-center">
-                <button class="text-white text-2xl focus:outline-none" id="mobile-menu-button">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="relative ml-4">
-                    <button class="text-white">
-                        <i class="fas fa-shopping-cart text-xl"></i>
-                        <span
-                            class="absolute -top-2 -right-2 bg-yellow-500 text-xs text-white rounded-full h-5 w-5 flex items-center justify-center">3</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div class="mobile-menu md:hidden bg-gray-900 mt-2 rounded-lg" id="mobile-menu">
-            <div class="px-4 py-3 space-y-4">
-                <a href="#" class="block text-white hover:text-yellow-400 transition">Home</a>
-                <a href="#featured" class="block text-white hover:text-yellow-400 transition">Menu</a>
-                <a href="#how-it-works" class="block text-white hover:text-yellow-400 transition">How It Works</a>
-                <a href="#testimonials" class="block text-white hover:text-yellow-400 transition">Reviews</a>
-                <a href="#contact" class="block text-white hover:text-yellow-400 transition">Contact</a>
-                <button
-                    class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-full transition">
-                    Sign In
-                </button>
-            </div>
-        </div>
-    </nav>
-
+  <%- include('./partials/nav') %>
 
     <!-- Hero Section with Image -->
     <section class="relative h-screen w-screen flex items-center justify-center overflow-hidden">
@@ -141,8 +81,8 @@
             <h1 class="text-5xl font-bold drop-shadow-lg">WELCOME TO PUSTAKAKITA</h1>
             <p class="mt-4 text-xl drop-shadow-md">membaca membuka jendela dunia bukan membuka hatimu ea</p>
       <a href="/books"
-   class="mt-6 inline-block bg-yellow-900 hover:bg-yellow-800 text-white px-6 py-3 rounded-lg transition duration-300">
-   Daftar Buku
+   class="mt-6 inline-block bg-yellow-900 hover:bg-yellow-800 text-white px-6 py-4 rounded-lg transition duration-300">
+   Show More
 </a>
 
         </div>
