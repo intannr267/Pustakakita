@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Invoice Peminjaman Buku</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <div class="max-w-4xl mx-auto my-10 p-6 bg-white shadow-md rounded-lg">
+    <h1 class="text-2xl font-bold mb-6 text-center text-indigo-600">Invoice Peminjaman Buku</h1>
+
+    <table class="table-auto w-full border-collapse border border-gray-300">
+      <tbody>
+        <tr class="bg-gray-100">
+          <th class="border px-4 py-2 text-left">Judul Buku</th>
+          <td class="border px-4 py-2"><%= invoice.Book.title %></td>
+        </tr>
+        <tr>
+          <th class="border px-4 py-2 text-left">Kategori</th>
+          <td class="border px-4 py-2">
+            <% invoice.Book.categories.forEach((el) => { %>
+              <%><%= el %>
+            <% }) %>
+          </td>
+        </tr>
+        <tr class="bg-gray-100">
+          <th class="border px-4 py-2 text-left">Peminjam</th>
+          <td class="border px-4 py-2"><%= invoice.User.name %></td>
+        </tr>
+        <tr class="bg-gray-100">
+          <th class="border px-4 py-2 text-left">Tanggal Kembali</th>
+          <td class="border px-4 py-2"><%= invoice.returnDate %></td>
+        </tr>
+        <tr>
+          <th class="border px-4 py-2 text-left">Penerbit</th>
+          <td class="border px-4 py-2"><%= invoice.Book.publisher %></td>
+        </tr>
+        <tr class="bg-gray-100">
+          <th class="border px-4 py-2 text-left">ISBN</th>
+          <td class="border px-4 py-2"><%= invoice.Book.isbn %></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="mt-6 text-center">
+      <a href="/books" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Kembali ke Daftar Buku</a>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -36,13 +36,9 @@ router.post("/login", Controller.saveLogin);
  router.get("/categories", Controller.allCategories);
  router.get("/profile/:id", Controller.showEditProfile);
 router.post("/profile/:id", Controller.saveEditProfile);
-// router.post("/books/add", Controller.X);
 router.get('/categories/:categoryId/books', Controller.showBooksByCategory);
 router.get('/books/:bookId', Controller.showBookDetail);
-// router.get('/books/:booksId/user/add', Controller.X);
-// router.post('/books/:booksId/user/add', Controller.X);
-// router.get('/stores/:storeId/employeeId/edit', Controller.X);
-// router.post('/stores/:storeId/employeeId/edit', Controller.X);
-// router.get('/stores/:storeId/employees/:employeeId/delete', Controller.X);
-// router.get('/employees', Controller.stores);
+router.get('/books/:id/delete', Controller.deleteBookbyId);
+
+
 module.exports = router;

@@ -5,9 +5,11 @@
   <title>Tambah Buku</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100 p-8">
-  <div class="max-w-xl mx-auto bg-white shadow-md p-6 rounded">
-    <h1 class="text-2xl font-bold mb-4 text-center">Add Collection</h1>
+
+<body class="bg-gray-100 ">
+  <%- include('partials/nav') %>
+  <div class="max-w-xl mx-auto bg-white shadow-md p-10 rounded ">
+    <h1 class="text-2xl font-bold mb-4 text-center ">Add Collection</h1>
     <form action="/books/add" method="POST" class="space-y-4">
       <div>
         <label class="block font-semibold">Judul</label>
