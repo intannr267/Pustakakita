@@ -1,17 +1,18 @@
 const express = require("express");
-const Controller = require("../controllers/controller");
+const Controller = require("../controllers/controller.js");
 const router = express.Router();
 
+router.get("/", Controller.landingPage);
+router.get("/books", Controller.readBook);
+// router.get('/books/add', Controller.X);
+// router.post('/books/add', Controller.X);
 router.get("/register", Controller.showRegister);
 router.post("/register", Controller.saveRegister);
 
 router.get("/login", Controller.showLogin);
 router.post("/login", Controller.saveLogin);
-
-router.get("/", Controller.home);
-router.get("/books", Controller.X);
-router.get("/books/add", Controller.X);
-router.post("/books/add", Controller.X);
+// router.get("/books/add", Controller.X);
+// router.post("/books/add", Controller.X);
 
 // router.get('/books/:booksId/user/add', Controller.X);
 // router.post('/books/:booksId/user/add', Controller.X);

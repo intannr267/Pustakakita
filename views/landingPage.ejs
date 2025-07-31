@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pustakakita</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .font-poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .hero-overlay {
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .navbar {
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background-color: rgba(0, 0, 0, 0.9);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .mobile-menu.open {
+            max-height: 500px;
+        }
+
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(234, 179, 8, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(234, 179, 8, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(234, 179, 8, 0);
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans overflow-x-hidden">
+    <!-- Navigation Bar -->
+    <nav class="navbar fixed w-full z-50 px-8 py-3 md:px-20">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <a href="#" class="text-white text-2xl font-bold flex items-center">
+                    <span>PUSTAKAKITA</span>
+                </a>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#" class="text-white hover:text-yellow-400 transition">Home</a>
+                <a href="#featured" class="text-white hover:text-yellow-400 transition">Books</a>
+                <a href="#how-it-works" class="text-white hover:text-yellow-400 transition">Categories</a>
+                <a href="#testimonials" class="text-white hover:text-yellow-400 transition">Add Book</a>
+                <a href="#contact" class="text-white hover:text-yellow-400 transition">Invoice</a>
+                <button
+                    class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded-full transition">
+                    Sign In
+                </button>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden flex items-center">
+                <button class="text-white text-2xl focus:outline-none" id="mobile-menu-button">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="relative ml-4">
+                    <button class="text-white">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span
+                            class="absolute -top-2 -right-2 bg-yellow-500 text-xs text-white rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="mobile-menu md:hidden bg-gray-900 mt-2 rounded-lg" id="mobile-menu">
+            <div class="px-4 py-3 space-y-4">
+                <a href="#" class="block text-white hover:text-yellow-400 transition">Home</a>
+                <a href="#featured" class="block text-white hover:text-yellow-400 transition">Menu</a>
+                <a href="#how-it-works" class="block text-white hover:text-yellow-400 transition">How It Works</a>
+                <a href="#testimonials" class="block text-white hover:text-yellow-400 transition">Reviews</a>
+                <a href="#contact" class="block text-white hover:text-yellow-400 transition">Contact</a>
+                <button
+                    class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-full transition">
+                    Sign In
+                </button>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Hero Section with Image -->
+    <section class="relative h-screen w-screen flex items-center justify-center overflow-hidden">
+        <!-- Image Background -->
+        <img src="https://images.unsplash.com/photo-1722182877533-7378b60bf1e8?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bGlicmFyeSUyMGJhY2tncm91bmR8ZW58MHx8MHx8fDA%3D"
+            alt="Library Background" class="absolute inset-0 w-full h-full object-cover z-0" />
+
+        <!-- Dark Overlay -->
+        <div class="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
+
+        <!-- Overlay Content -->
+        <div class="relative z-10 text-white text-center px-4">
+            <h1 class="text-5xl font-bold drop-shadow-lg">WELCOME TO PUSTAKAKITA</h1>
+            <p class="mt-4 text-xl drop-shadow-md">membaca membuka jendela dunia bukan membuka hatimu ea</p>
+      <a href="/books"
+   class="mt-6 inline-block bg-yellow-900 hover:bg-yellow-800 text-white px-6 py-3 rounded-lg transition duration-300">
+   Daftar Buku
+</a>
+
+        </div>
+    </section>
+
+    <!-- Featured Items Section -->
+    <section id="featured" class="py-20 bg-gray-100 md:px-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-6xl md:text-4xl font-bold text-gray-800 mb-4">Kategori Buku</h2>
+            
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Food Item 1 -->
+                <div
+                    class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-2">
+                    <div class="relative">
+                        <img src="https://www.book-editing.com/wp-content/uploads/2018/08/fiction-nonfiction-1024x682.jpg"
+                            alt="Fiction" class="w-full h-64 object-cover">
+                        <div
+                            class="absolute top-4 right-4 bg-red-500 text-white text-sm font-bold px-3 py-1 rounded-full">
+                            Most Popular
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-xl font-bold text-gray-800"> Fiction</h3>
+                        </div>
+
+                        <div class="mt-4 flex justify-between items-center">
+                            <div class="flex items-center text-yellow-400">
+
+                            </div>
+                            <button
+                                class="bg-yellow-900 hover:bg-yellow-800 text-white text-sm sm:text-base px-4 py-2 rounded-full shadow-md transition duration-300">
+                                Show More
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Food Item 2 -->
+                <div
+                    class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-2">
+                    <div class="relative">
+                        <img src="https://imageio.forbes.com/specials-images/imageserve/5fca87f3ce4ca55e8985a10a/0x0.jpg?format=jpg&height=900&width=1600&fit=bounds"
+                            alt="Bisnis" class="w-full h-64 object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-xl font-bold text-gray-800">Bussiness</h3>
+
+                        </div>
+
+                        <div class="mt-4 flex justify-between items-center">
+                            <div class="flex items-center text-yellow-400">
+                            </div>
+                            <button
+                                class="bg-yellow-900 hover:bg-yellow-800 text-white text-sm sm:text-base px-4 py-2 rounded-full shadow-md transition duration-300">
+                                Show More
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div
+                    class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-2">
+                    <div class="relative">
+                        <img src="https://i0.wp.com/garonpower.com/wp-content/uploads/2019/01/computer-programming.jpeg?fit=1500%2C1000&ssl=1"
+                            alt="Programming" class="w-full h-64 object-cover">
+                        <div
+                            class="absolute top-4 right-4 bg-red-500 text-white text-sm font-bold px-3 py-1 rounded-full">
+                            Most Populer
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg sm:text-xl font-semibold text-gray-800">Programming</h3>
+                          <div class="mt-4 flex justify-between items-center">
+                            <div class="flex items-center text-yellow-400">
+                            </div>
+                            <button
+                                class="bg-yellow-900 hover:bg-yellow-800 text-white text-sm sm:text-base px-4 py-2 rounded-full shadow-md transition duration-300">
+                                Show More
+                            </button>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+ </div>
+      <div class="w-full flex justify-center mt-12">
+  <button
+    class="bg-yellow-900 hover:bg-yellow-800 text-white text-sm font-medium py-4 px-10 rounded-full transition-all duration-300 shadow">
+    View All Books
+  </button>
+</div>
+
+
+      
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">How It Works</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Get your favorite food delivered in just 3 simple steps</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="text-center p-6 rounded-lg hover:bg-gray-50 transition">
+                    <div class="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-search text-yellow-500 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">1. Choose Your Food</h3>
+                    <p class="text-gray-600">Browse through our menu and select your favorite dishes.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="text-center p-6 rounded-lg hover:bg-gray-50 transition">
+                    <div class="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-credit-card text-yellow-500 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">2. Make Payment</h3>
+                    <p class="text-gray-600">Pay securely online with various payment methods available.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="text-center p-6 rounded-lg hover:bg-gray-50 transition">
+                    <div class="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-motorcycle text-yellow-500 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">3. Fast Delivery</h3>
+                    <p class="text-gray-600">Get your food delivered quickly to your doorstep.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">What Our Customers Say</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Hear from people who have enjoyed our food delivery service
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-8 rounded-xl shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="flex items-center text-yellow-400 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="text-gray-600 text-sm">5.0</span>
+                    </div>
+                    <p class="text-gray-700 mb-6">"The food arrived hot and fresh, exactly as described. Delivery was
+                        faster than expected. Will definitely order again!"</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sarah J."
+                            class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold text-gray-800">Sarah J.</h4>
+                            <p class="text-gray-600 text-sm">Regular Customer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-8 rounded-xl shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="flex items-center text-yellow-400 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span class="text-gray-600 text-sm">4.5</span>
+                    </div>
+                    <p class="text-gray-700 mb-6">"Great variety of restaurants to choose from. The app makes ordering
+                        so easy, and the delivery guys are always polite."</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Michael T."
+                            class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold text-gray-800">Michael T.</h4>
+                            <p class="text-gray-600 text-sm">New Customer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-8 rounded-xl shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="flex items-center text-yellow-400 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="text-gray-600 text-sm">5.0</span>
+                    </div>
+                    <p class="text-gray-700 mb-6">"I order at least twice a week. Consistent quality, great packaging,
+                        and the loyalty program has amazing rewards!"</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emily R."
+                            class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold text-gray-800">Emily R.</h4>
+                            <p class="text-gray-600 text-sm">Loyal Customer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- JavaScript -->
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Animation on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate-fade-in, .animate-fade-in-delay, .animate-fade-in-delay-2');
+
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+
+                if (elementPosition < screenPosition) {
+                    element.classList.add('opacity-100', 'translate-y-0');
+                }
+            });
+        }
+
+        // Set initial state for animated elements
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.animate-fade-in, .animate-fade-in-delay, .animate-fade-in-delay-2');
+            animatedElements.forEach(el => {
+                el.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-500');
+            });
+
+            // Add delay classes
+            document.querySelector('.animate-fade-in-delay').classList.add('delay-200');
+            document.querySelector('.animate-fade-in-delay-2').classList.add('delay-300');
+
+            // Trigger initial animation
+            animateOnScroll();
+        });
+
+        // Add scroll event listener
+        window.addEventListener('scroll', animateOnScroll);
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function () {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', function () {
+            mobileMenu.classList.toggle('open');
+
+            // Change icon based on menu state
+            if (mobileMenu.classList.contains('open')) {
+                mobileMenuButton.innerHTML = '<i class="fas fa-times"></i>';
+            } else {
+                mobileMenuButton.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+    </script>
+</body>
+
+</html>
