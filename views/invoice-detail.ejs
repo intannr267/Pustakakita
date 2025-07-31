@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>All Invoices</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-yellow-50 p-8 font-sans">
+
+  <div class="max-w-6xl mx-auto bg-white p-6 rounded shadow-md border border-yellow-200">
+    <h1 class="text-3xl font-bold mb-6 text-yellow-900">All Invoices</h1>
+
+    <% if (invoices.length> 0) { %>
+      <table class="w-full table-auto border border-collapse border-yellow-300">
+        <thead class="bg-yellow-200 text-yellow-900">
+          <tr>
+            <th class="border p-2">No.</th>
+            <th class="border p-2">Invoice ID</th>
+            <th class="border p-2">User ID</th>
+            <th class="border p-2">Invoice Date</th>
+            <th class="border p-2">Total Books</th>
+            <th class="border p-2">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% invoices.forEach(function(invoice, index) { %>
+            <tr class="text-center hover:bg-yellow-100">
+              <td class="border p-2">
+                <%= index + 1 %>
+              </td>
+              <td class="border p-2">
+                <%= invoice.id %>
+              </td>
+              <td class="border p-2">
+                <%= invoice.UserId %>
+              </td>
+              <td class="border p-2">
+                <%= invoice.formattedInvoiceDate || '-' %>
+              </td>
+
+              <td class="border p-2">
+                <%= invoice.Borrows ? invoice.Borrows.length : 0 %>
+              </td>
+              <td class="border p-2">
+
+                <a href="/invoices/<%= invoice.id %>" class="text-yellow-700 hover:underline font-semibold">View
+                  Detail</a>
+              </td>
+            </tr>
+            <% }) %>
+        </tbody>
+      </table>
+      <% } else { %>
+        <p class="text-yellow-100">No invoices found.</p>
+        <% } %>
+
+          <div class="mt-6">
+            <a href="/books" class="bg-yellow-700 text-white px-4 py-2 rounded hover:bg-yellow-800">Back to Books</a>
+          </div>
+  </div>
+
+</body>
+
+</html>

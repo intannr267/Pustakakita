@@ -7,7 +7,10 @@ const {
   Borrow,
   Invoice,
 } = require("../models/index");
-const { Op } = require("sequelize");
+const { borrowBook, returnDate } = require('../helpers/helper'); 
+
+const QRCode = require('qrcode');
+const { Op, where } = require("sequelize");
 const bcrypt = require("bcryptjs");
 
 class Controller {
@@ -291,55 +294,81 @@ class Controller {
     }
   }
 
-  static async getInvoices(req, res) {
+  static async showInvoice(req, res) {
     try {
-      res.send("X");
-    } catch (error) {
-      console.log(error);
-      res.send(error);
+
+      const invoice = await Invoice.findAll({
+        include: {
+          model: Borrow
+        }
+      });
+
+      if (!invoice) {
+        throw 'No Available Invoice'
+      }
+      //res.send(invoice)
+      res.render("invoice-detail", { invoices: invoice });
+
+
+    } catch (err) {
+      console.error(err);
+      res.send(err)
     }
   }
 
   static async invoiceQr(req, res) {
     try {
-      res.send("X");
-    } catch (error) {
-      console.log(error);
-      res.send(error);
-    }
-  }
+      const { id } = req.params;
 
-  static async showInvoice(req, res) {
-    try {
-      const { borrowId } = req.params;
-
-      const invoice = await Borrow.findByPk(borrowId, {
-        include: [
-          {
-            model: Book,
-            include: [Category],
-          },
-          {
-            model: User,
-          },
-        ],
+      const invoice = await Invoice.findByPk(id, {
+        include: [Borrow]
       });
 
-      res.render("invoice", { invoice });
+      if (!invoice) throw new Error("Invoice not found");
+
+      const baseUrl = req.protocol + '://' + req.get('host');
+      const targetUrl = `${baseUrl}/invoice/${id}/show`;
+
+      const qrCodeUrl = await QRCode.toDataURL(targetUrl);
+
+      res.render("invoice-qr", { invoice, qrCodeUrl });
+    } catch (err) {
+      console.log(err);
+      res.send(err);
+    }
+  }
+  static async invoiceDetail(req, res) {
+    try {
+      const { id } = req.params;
+
+  const invoice = await Invoice.findByPk(id, {
+  include: [
+    {
+      model: User,
+      include: {
+        model: Profile
+      }
+    },
+    {
+      model: Borrow,
+      include: {
+        model: Book
+      }
+    }
+  ]
+});
+
+// res.send(invoice.Borrows[0].returnDate)
+
+      if (!invoice) throw new Error("Invoice not found");
+
+      res.render("invoice-showdetail", { invoice, borrowBook});
     } catch (err) {
       console.log(err);
       res.send(err);
     }
   }
 
-  static async X(req, res) {
-    try {
-      res.send("X");
-    } catch (error) {
-      console.log(error);
-      res.send(error);
-    }
-  }
 }
 
 module.exports = Controller;
