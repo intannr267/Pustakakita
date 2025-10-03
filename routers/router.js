@@ -22,6 +22,10 @@ const isAdmin = (req, res, next) => {
   }
 };
 
+
+
+module.exports = router;
+
 //router.get("/", isLoggedIn, Controller.landingPage);
 router.get("/", Controller.landingPage);
 //router.get("/books", isLoggedIn, isAdmin, Controller.readBook);

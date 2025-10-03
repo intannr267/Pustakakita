@@ -7,21 +7,27 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
-<body class="font-sans overflow-x-hidden">
+<body class="font-sans bg-gradient-to-br from-yellow-50 to-white min-h-screen overflow-x-hidden">
   <%- include('./partials/nav') %>
 
-  <main class="flex-grow px-6 py-20">
-    <h1 class="text-3xl font-bold text-center mb-6 text-yellow-900">All Categories</h1>
+  <main class="flex-grow px-6 py-16">
+    <!-- Judul -->
+    <h1 class="text-4xl font-extrabold text-center mb-12 text-yellow-900 tracking-tight">
+      All Categories
+    </h1>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <!-- Grid kategori -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
       <% categories.forEach(el => { %>
-        <a href="/categories/<%= el.id %>/books">
-          <div class="bg-white border border-yellow-200 rounded-xl shadow-sm hover:shadow-md transition duration-300">
-            <div class="p-4">
-              <h2 class="text-lg font-semibold text-yellow-900 mb-1">
-                <%= el.name %>
-              </h2>
-            </div>
+        <a href="/categories/<%= el.id %>/books"
+           class="block group bg-white border border-yellow-200 rounded-2xl shadow-sm 
+                  hover:shadow-xl transform hover:-translate-y-1 transition duration-300">
+          <div class="p-6 flex flex-col items-center text-center">
+            <!-- Nama kategori -->
+            <h2 class="text-xl font-semibold text-yellow-800 group-hover:text-yellow-700">
+              <%= el.name %>
+            </h2>
+            <p class="text-sm text-gray-500 mt-1">Explore books</p>
           </div>
         </a>
       <% }) %>
