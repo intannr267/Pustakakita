@@ -2,69 +2,68 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pustakakita</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@400;600&display=swap"
-        rel="stylesheet">
-    <style>
-        .font-orbitron {
-            font-family: 'Orbitron', sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pustakakita</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@400;600&display=swap"
+    rel="stylesheet">
+  <style>
+    .font-orbitron {
+      font-family: 'Orbitron', sans-serif;
+    }
 
-        .font-poppins {
-            font-family: 'Poppins', sans-serif;
-        }
+    .font-poppins {
+      font-family: 'Poppins', sans-serif;
+    }
 
-        .hero-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-        }
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
 
-        .hero-overlay {
-            background: rgba(0, 0, 0, 0.5);
-        }
+    .hero-overlay {
+      background: rgba(0, 0, 0, 0.5);
+    }
 
-  
-        .mobile-menu {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-        }
+    .mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
 
-        .mobile-menu.open {
-            max-height: 500px;
-        }
+    .mobile-menu.open {
+      max-height: 500px;
+    }
 
-        .pulse-animation {
-            animation: pulse 2s infinite;
-        }
+    .pulse-animation {
+      animation: pulse 2s infinite;
+    }
 
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(234, 179, 8, 0.7);
-            }
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(234, 179, 8, 0.7);
+      }
 
-            70% {
-                box-shadow: 0 0 0 10px rgba(234, 179, 8, 0);
-            }
+      70% {
+        box-shadow: 0 0 0 10px rgba(234, 179, 8, 0);
+      }
 
-            100% {
-                box-shadow: 0 0 0 0 rgba(234, 179, 8, 0);
-            }
-        }
-    </style>
+      100% {
+        box-shadow: 0 0 0 0 rgba(234, 179, 8, 0);
+      }
+    }
+  </style>
 </head>
 
-<body class="font-sans overflow-x-hidden">
+<body class="font-poppins overflow-x-hidden">
+
   <%- include('./partials/nav') %>
 
   <% if (err) { %>
@@ -73,289 +72,203 @@
     </script>
   <% } %>
 
-<section class="relative h-[60vh] w-screen flex items-center justify-center overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1722182877533-7378b60bf1e8?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bGlicmFyeSUyMGJhY2tncm91bmR8ZW58MHx8MHx8fDA%3D"
-            alt="Library Background" class="absolute inset-0 w-full h-full object-cover z-0" />
-
-        <div class="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
-        <div class="relative z-10 text-white text-center px-4">
-            <h1 class="text-5xl font-bold drop-shadow-lg">WELCOME TO PUSTAKAKITA</h1>
-            <p class="mt-4 text-xl drop-shadow-md">Rent. Chill. Read. Repeat."</p>
+  <!-- Hero Section -->
+  <section class="relative h-[60vh] flex items-center justify-center overflow-hidden">
+    <img src="https://images.unsplash.com/photo-1722182877533-7378b60bf1e8?w=1000&auto=format&fit=crop&q=60"
+      alt="Library Background" class="absolute inset-0 w-full h-full object-cover z-0" />
+    <div class="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
+    <div class="relative z-10 text-center text-white px-4">
+      <h1 class="text-4xl font-orbitron font-bold drop-shadow-lg">WELCOME TO PUSTAKAKITA</h1>
+      <p class="mt-4 text-xl drop-shadow-md">Rent. Chill. Read. Repeat.</p>
       <a href="/books"
-   class="mt-6 inline-block bg-yellow-900 hover:bg-yellow-800 text-white px-6 py-4 rounded-lg transition duration-300">
-   Show More
-</a>
+        class="mt-6 inline-block bg-yellow-900 hover:bg-yellow-800 text-white px-6 py-4 rounded-lg transition duration-300">
+        Show More
+      </a>
+    </div>
+  </section>
+
+  <!-- Featured Categories -->
+  <section id="featured" class="py-20 bg-gray-100 md:px-20">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-4xl font-bold text-gray-800 mb-4">Book's Category</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Card: Fiction -->
+        <div
+          class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-2">
+          <div class="relative">
+            <img src="https://www.book-editing.com/wp-content/uploads/2018/08/fiction-nonfiction-1024x682.jpg"
+              alt="Fiction" class="w-full h-64 object-cover">
+            <div
+              class="absolute top-4 right-4 bg-red-500 text-white text-sm font-bold px-3 py-1 rounded-full">
+              Most Popular
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-800">Fiction</h3>
+          </div>
         </div>
-    </section>
 
-    <section id="featured" class="py-20 bg-gray-100 md:px-20">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-6xl md:text-4xl font-bold text-gray-800 mb-4">Book's Category</h2>        
+        <!-- Card: Business -->
+        <div
+          class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-2">
+          <div class="relative">
+            <img src="https://imageio.forbes.com/specials-images/imageserve/5fca87f3ce4ca55e8985a10a/0x0.jpg?format=jpg&height=900&width=1600&fit=bounds"
+              alt="Business" class="w-full h-64 object-cover">
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-800">Business</h3>
+          </div>
+        </div>
+
+        <!-- Card: Programming -->
+        <div
+          class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-2">
+          <div class="relative">
+            <img src="https://i0.wp.com/garonpower.com/wp-content/uploads/2019/01/computer-programming.jpeg?fit=1500%2C1000&ssl=1"
+              alt="Programming" class="w-full h-64 object-cover">
+            <div
+              class="absolute top-4 right-4 bg-red-500 text-white text-sm font-bold px-3 py-1 rounded-full">
+              Most Popular
             </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-800">Programming</h3>
+          </div>
+        </div>
+      </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div
-                    class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-2">
-                    <div class="relative">
-                        <img src="https://www.book-editing.com/wp-content/uploads/2018/08/fiction-nonfiction-1024x682.jpg"
-                            alt="Fiction" class="w-full h-64 object-cover">
-                        <div
-                            class="absolute top-4 right-4 bg-red-500 text-white text-sm font-bold px-3 py-1 rounded-full">
-                            Most Popular
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-xl font-bold text-gray-800"> Fiction</h3>
-                        </div>
-
-                        <div class="mt-4 flex justify-between items-center">
-                            <div class="flex items-center text-yellow-400">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-2">
-                    <div class="relative">
-                        <img src="https://imageio.forbes.com/specials-images/imageserve/5fca87f3ce4ca55e8985a10a/0x0.jpg?format=jpg&height=900&width=1600&fit=bounds"
-                            alt="Bisnis" class="w-full h-64 object-cover">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-xl font-bold text-gray-800">Bussiness</h3>
-
-                        </div>
-
-                        <div class="mt-4 flex justify-between items-center">
-                            <div class="flex items-center text-yellow-400">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div
-                    class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-2">
-                    <div class="relative">
-                        <img src="https://i0.wp.com/garonpower.com/wp-content/uploads/2019/01/computer-programming.jpeg?fit=1500%2C1000&ssl=1"
-                            alt="Programming" class="w-full h-64 object-cover">
-                        <div
-                            class="absolute top-4 right-4 bg-red-500 text-white text-sm font-bold px-3 py-1 rounded-full">
-                            Most Populer
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-center">
-                            <h3 class="text-lg sm:text-xl font-semibold text-gray-800">Programming</h3>
-                          <div class="mt-4 flex justify-between items-center">
-                            <div class="flex items-center text-yellow-400">
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
- </div>
       <div class="w-full flex justify-center mt-12">
-  <button
-    class="bg-yellow-900 hover:bg-yellow-800 text-white text-sm font-medium py-4 px-10 rounded-full transition-all duration-300 shadow">
-    View All Books
-  </button>
-</div>
+        <button
+          class="bg-yellow-900 hover:bg-yellow-800 text-white text-sm font-medium py-4 px-10 rounded-full transition-all duration-300 shadow">
+          View All Books
+        </button>
+      </div>
+    </div>
+  </section>
 
-    </section>
-    <section id="how-it-works" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">How it Work</h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="text-center p-6 rounded-lg hover:bg-gray-50 transition">
-                    <div class="w-20 h-20 bg-yellow-900 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-search text-yellow-100 text-3xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3">1. Choose Your Book</h3>
-                    <p class="text-gray-600">Browse through our collection and select your favorite books.</p>
-                </div>
-
-                <div class="text-center p-6 rounded-lg hover:bg-gray-50 transition">
-                    <div class="w-20 h-20 bg-yellow-900 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-credit-card text-yellow-100 text-3xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3">2. Place Your Book Order</h3>
-                    <p class="text-gray-600">Choose your favorite titles and start your reading journey today</p>
-                </div>
-
-              
-                <div class="text-center p-6 rounded-lg hover:bg-gray-50 transition">
-                    <div class="w-20 h-20 bg-yellow-900 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-book text-yellow-100 text-3xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3">3. Enjoy Your  book</h3>
-                    <p class="text-gray-600">Get your food rent quickly no more drama.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="py-20 bg-gray-100">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">What Our Customers Say</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Hear from people who have enjoyed our services
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Testimonial 1 -->
-                <div class="bg-white p-8 rounded-xl shadow-md">
-                    <div class="flex items-center mb-4">
-                        <div class="flex items-center text-yellow-400 mr-2">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <span class="text-gray-600 text-sm">5.0</span>
-                    </div>
-                    <p class="text-gray-700 mb-6">"Simpel banget mau pinjem buku gak pake adu bacok sama orang"</p>
-                    <div class="flex items-center">
-                        <img src="data:image/jpeg;base64,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" alt="Sarah J."
-                            class="w-12 h-12 rounded-full mr-4">
-                        <div>
-                            <h4 class="font-bold text-gray-800">Siti Alexandra.</h4>
-                            <p class="text-gray-600 text-sm">Pelajar</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Testimonial 2 -->
-                <div class="bg-white p-8 rounded-xl shadow-md">
-                    <div class="flex items-center mb-4">
-                        <div class="flex items-center text-yellow-400 mr-2">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <span class="text-gray-600 text-sm">4.5</span>
-                    </div>
-                    <p class="text-gray-700 mb-6">"Sumpah enak bangett mau pinjem buku ga perlu keliling cari stock bukunya cuma berkelana dan buat janjian"</p>
-                    <div class="flex items-center">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-u_5dIgbdD92gp1LYDnvajVcFejZis651WA&s" alt="Michael T."
-                            class="w-12 h-12 rounded-full mr-4">
-                        <div>
-                            <h4 class="font-bold text-gray-800">Michael Joko</h4>
-                            <p class="text-gray-600 text-sm">Mahasiswa</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Testimonial 3 -->
-                <div class="bg-white p-8 rounded-xl shadow-md">
-                    <div class="flex items-center mb-4">
-                        <div class="flex items-center text-yellow-400 mr-2">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <span class="text-gray-600 text-sm">5.0</span>
-                    </div>
-                    <p class="text-gray-700 mb-6">"Sebagai kaum introvert yg malu banget nanya petugas ini beneran membantu bgt sii bisa save energy "</p>
-                    <div class="flex items-center">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBTZVrMedrPJokHstnEa-cNC3uHTpDRXIFvA&s"
-                            class="w-12 h-12 rounded-full mr-4">
-                        <div>
-                            <h4 class="font-bold text-gray-800">Putri Padang</h4>
-                            <p class="text-gray-600 text-sm">Pengusaha Roti Sweety</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <!-- How it Works -->
+  <section id="how-it-works" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">How it Works</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Step 1 -->
+        <div class="text-center p-6 rounded-lg hover:bg-gray-50 transition">
+          <div class="w-20 h-20 bg-yellow-900 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fas fa-search text-yellow-100 text-3xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 mb-3">1. Choose Your Book</h3>
+          <p class="text-gray-600">Browse through our collection and select your favorite books.</p>
         </div>
 
-    </section>
-<%- include('partials/footer') %>
+        <!-- Step 2 -->
+        <div class="text-center p-6 rounded-lg hover:bg-gray-50 transition">
+          <div class="w-20 h-20 bg-yellow-900 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fas fa-credit-card text-yellow-100 text-3xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 mb-3">2. Place Your Book Order</h3>
+          <p class="text-gray-600">Choose your favorite titles and start your reading journey today.</p>
+        </div>
 
+        <!-- Step 3 -->
+        <div class="text-center p-6 rounded-lg hover:bg-gray-50 transition">
+          <div class="w-20 h-20 bg-yellow-900 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fas fa-book text-yellow-100 text-3xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 mb-3">3. Enjoy Your Book</h3>
+          <p class="text-gray-600">Receive your book quickly and enjoy your reading journey without hassle.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- JavaScript -->
-    <script>
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
+  <!-- Testimonials -->
+  <section id="testimonials" class="py-20 bg-gray-100">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">What Our Customers Say</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">Hear from people who have enjoyed our services</p>
+      </div>
 
-        // Animation on scroll
-        function animateOnScroll() {
-            const elements = document.querySelectorAll('.animate-fade-in, .animate-fade-in-delay, .animate-fade-in-delay-2');
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Testimonial 1 -->
+        <div class="bg-white p-8 rounded-xl shadow-md">
+          <div class="flex items-center mb-4">
+            <div class="flex items-center text-yellow-400 mr-2">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <span class="text-gray-600 text-sm">5.0</span>
+          </div>
+          <p class="text-gray-700 mb-6">"Simpel banget mau pinjem buku gak pake adu bacok sama orang"</p>
+          <div class="flex items-center">
+            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/..." alt="Sarah J."
+              class="w-12 h-12 rounded-full mr-4">
+            <div>
+              <h4 class="font-bold text-gray-800">Siti Alexandra</h4>
+              <p class="text-gray-600 text-sm">Pelajar</p>
+            </div>
+          </div>
+        </div>
 
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.3;
+        <!-- Testimonial 2 -->
+        <div class="bg-white p-8 rounded-xl shadow-md">
+          <div class="flex items-center mb-4">
+            <div class="flex items-center text-yellow-400 mr-2">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <span class="text-gray-600 text-sm">4.5</span>
+          </div>
+          <p class="text-gray-700 mb-6">"Sumpah enak banget mau pinjem buku ga perlu keliling cari stock bukunya"</p>
+          <div class="flex items-center">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-u_5dIgbdD92gp1LYDnvajVcFejZis651WA&s" alt="Michael T."
+              class="w-12 h-12 rounded-full mr-4">
+            <div>
+              <h4 class="font-bold text-gray-800">Michael Joko</h4>
+              <p class="text-gray-600 text-sm">Mahasiswa</p>
+            </div>
+          </div>
+        </div>
 
-                if (elementPosition < screenPosition) {
-                    element.classList.add('opacity-100', 'translate-y-0');
-                }
-            });
-        }
+        <!-- Testimonial 3 -->
+        <div class="bg-white p-8 rounded-xl shadow-md">
+          <div class="flex items-center mb-4">
+            <div class="flex items-center text-yellow-400 mr-2">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <span class="text-gray-600 text-sm">5.0</span>
+          </div>
+          <p class="text-gray-700 mb-6">"Mudah banget cari buku-buku favoritku, puas!"</p>
+          <div class="flex items-center">
+            <img src="https://i.ibb.co/58DcmNr/avatar.png" alt="Emily R."
+              class="w-12 h-12 rounded-full mr-4">
+            <div>
+              <h4 class="font-bold text-gray-800">Lia Ramadhani</h4>
+              <p class="text-gray-600 text-sm">Pelajar</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        // Set initial state for animated elements
-        document.addEventListener('DOMContentLoaded', () => {
-            const animatedElements = document.querySelectorAll('.animate-fade-in, .animate-fade-in-delay, .animate-fade-in-delay-2');
-            animatedElements.forEach(el => {
-                el.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-500');
-            });
+  <%- include('./partials/footer') %>
 
-            // Add delay classes
-            document.querySelector('.animate-fade-in-delay').classList.add('delay-200');
-            document.querySelector('.animate-fade-in-delay-2').classList.add('delay-300');
-
-            // Trigger initial animation
-            animateOnScroll();
-        });
-
-        // Add scroll event listener
-        window.addEventListener('scroll', animateOnScroll);
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', function () {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        mobileMenuButton.addEventListener('click', function () {
-            mobileMenu.classList.toggle('open');
-
-            // Change icon based on menu state
-            if (mobileMenu.classList.contains('open')) {
-                mobileMenuButton.innerHTML = '<i class="fas fa-times"></i>';
-            } else {
-                mobileMenuButton.innerHTML = '<i class="fas fa-bars"></i>';
-            }
-        });
-    </script>
 </body>
 
 </html>
